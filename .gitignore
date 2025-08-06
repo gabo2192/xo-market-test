@@ -1,0 +1,67 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
+
+# Testing
+coverage
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+.next/
+out/
+build
+dist
+
+
+# Debug
+npm-debug.log*
+
+# Misc
+.DS_Store
+*.pem
+
+repomix-output.xml
+
+
+# ========================================
+# TERRAFORM FILES - CRITICAL FOR SECURITY
+# ========================================
+
+# Terraform state files (contain sensitive data)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Terraform variable files (contain secrets)
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Terraform plan files
+*.tfplan
+*.tfplan.*
+
+# Terraform crash logs
+crash.log
+crash.*.log

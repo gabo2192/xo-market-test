@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: xo-market-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: xo_market_db
+      POSTGRES_USER: xo_market_user
+      POSTGRES_PASSWORD: xo_market_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./apps/server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xo_market_user -d xo_market_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: xo-market-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass xo_market_password
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - REDIS_PASSWORD=xo_market_password
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local

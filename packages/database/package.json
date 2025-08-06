@@ -1,0 +1,54 @@
+{
+  "name": "@workspace/database",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Shared database package with Drizzle ORM",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "default": "./dist/client/index.js"
+    },
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "default": "./dist/schema/index.js"
+    },
+    "./src/client": {
+      "types": "./dist/client/index.d.ts",
+      "default": "./dist/client/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "lint": "eslint src --max-warnings 0",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "drizzle-orm": "^0.44.3",
+    "pg": "^8.16.3",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.10",
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "drizzle-kit": "^0.31.4",
+    "typescript": "^5.7.3"
+  },
+  "files": [
+    "dist/**/*",
+    "drizzle.config.ts",
+    "src/migrations/**/*"
+  ]
+}
